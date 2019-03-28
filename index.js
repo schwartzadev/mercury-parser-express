@@ -3,7 +3,7 @@ const Express = require('express');
 const cheerio = require('cheerio')
 
 
-
+const port = 5555;
 const app = Express();
 
 app.get('/card/', (req, res) => {
@@ -18,6 +18,6 @@ app.get('/card/', (req, res) => {
 });
 
 
-app.listen(3000, () => {
-  console.log('server running on port 3000');
+app.listen(port, () => {
+  console.log('server running on port ' + port);
 })
