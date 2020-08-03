@@ -7,3 +7,6 @@ An Express server to run the Postlight Mercury Parser (see @Postlight for the pa
 3. Run `npm start`
 4. Visit http://localhost:5555/card/?url={{url}} (where {{url}} is the url of your source)
 
+## Docker
+1. `docker build -t mercury-parser .`
+2. `docker run -p 5555:5555 -d mercury-parser`
