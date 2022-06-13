@@ -12,6 +12,8 @@ const corsOrigin = process.env.CORS_ORIGIN;
 if (!corsOrigin) {
   console.error('CORS_ORIGIN environment variable is not set');
   process.exit(1);
+} else {
+  console.log(`CORS_ORIGIN: ${corsOrigin}`);
 }
 
 const corsOptions = {
