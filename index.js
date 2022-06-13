@@ -1,19 +1,27 @@
-const Mercury = require('@postlight/mercury-parser');
+require('dotenv').config();
+
+const mercury = require('@postlight/mercury-parser');
 const Express = require('express');
-const cheerio = require('cheerio')
 const cors = require('cors');
 
-const port = 5555;
 const app = Express();
 
-var corsOptions = {
-  origin: 'http://51.15.99.218',
+const port = process.env.PORT || 5555;
+const corsOrigin = process.env.CORS_ORIGIN;
+
+if (!corsOrigin) {
+  console.error('CORS_ORIGIN environment variable is not set');
+  process.exit(1);
+}
+
+const corsOptions = {
+  origin: corsOrigin,
   optionsSuccessStatus: 200
 }
 
-app.get('/card/', cors(corsOptions), function (req, res) {
-  url = req.query.url;
-  Mercury.parse(url, { contentType: 'text'}).then(function (mercuryResult) {
+app.get('/', cors(corsOptions), (req, res) => {
+  const url = req.query.url;
+  mercury.parse(url, { contentType: 'text'}).then(mercuryResult => {
     res.status(200).send({
       success: 'true',
       url: url,
@@ -24,5 +32,5 @@ app.get('/card/', cors(corsOptions), function (req, res) {
 
 
 app.listen(port, () => {
-  console.log('server running on port ' + port);
+  console.log('running on port ' + port);
 })
